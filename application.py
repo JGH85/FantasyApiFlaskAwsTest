@@ -25,14 +25,14 @@ PlayerGame = Base.classes.player_game
 #################################################
 # Flask Setup
 #################################################
-app = Flask(__name__)
+application = Flask(__name__)
 
 
 #################################################
 # Flask Routes
 #################################################
 
-# @app.route("/")
+# @application.route("/")
 # def welcome():
 #     """Available api routes."""
 #     return (
@@ -47,12 +47,12 @@ app = Flask(__name__)
 
 #     )
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template("index.html")
 
 
-@app.route("/api/names")
+@application.route("/api/names")
 def names():
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -69,7 +69,7 @@ def names():
     return jsonify(all_names)
 
 
-@app.route("/api/players")
+@application.route("/api/players")
 def players():
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -91,7 +91,7 @@ def players():
     return jsonify(all_players)
 
 # # TODO: Create route for player games
-# @app.route("/api/v1.0/player_games")
+# @application.route("/api/v1.0/player_games")
 # def player_game():
 #     # Create our session (link) from Python to the DB
 #     session = Session(engine)
@@ -113,8 +113,8 @@ def players():
 # #     return jsonify(all_players)
 
 # TODO: Create route for player stats
-@app.route("/api/player_stats/<name>")
-# @app.route("/api/v1.0/temp/<start>/<end>")
+@application.route("/api/player_stats/<name>")
+# @application.route("/api/v1.0/temp/<start>/<end>")
 def player_stats(name=None):
     # # Select statement
     # sel = [func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
@@ -169,8 +169,8 @@ def player_stats(name=None):
 
 
 # TODO: Create route for player stats
-@app.route("/api/player_stats_year/<year>/<name>")
-# @app.route("/api/v1.0/temp/<start>/<end>")
+@application.route("/api/player_stats_year/<year>/<name>")
+# @application.route("/api/v1.0/temp/<start>/<end>")
 def player_stats_year(year=None, name=None):
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -215,4 +215,4 @@ def player_stats_year(year=None, name=None):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
